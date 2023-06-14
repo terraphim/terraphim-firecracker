@@ -1,0 +1,19 @@
+[Unit]
+Description=RedisGears Service
+After=network.target
+Requires=redis.service
+
+[Service]
+Type=simple
+
+WorkingDirectory=/opt/rediscluster
+
+#EnvironmentFile=/fastapiapp/.env
+
+ExecStart=/opt/rediscluster/rgservice.sh
+ExecReload=/bin/kill -HUP ${MAINPID}
+RestartSec=1
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
