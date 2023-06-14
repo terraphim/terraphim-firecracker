@@ -92,7 +92,7 @@ bionic-image:
     RUN mkdir -m 0600 -p /root/.ssh/
     RUN cp keypairs/terraphim.pub /root/.ssh/authorized_keys
     RUN cp keypairs/terraphim.pub /root/.ssh/authorized_keys && chmod 644 /root/.ssh/authorized_keys
-    SAVE ARTIFACT keypairs
+    SAVE ARTIFACT keypairs AS LOCAL keypairs
 
 
 bionic-terraphim:
@@ -145,6 +145,10 @@ terraphim-python:
     SAVE IMAGE terraphim-python:latest
     SAVE IMAGE --push ghcr.io/terraphim/terraphim-python:bionic
 
+save-keys:
+    FROM +bionic-image
+    COPY --chmod 644 +bionic-image/keypairs keypairs
+    SAVE ARTIFACT keypairs AS LOCAL keypairs
 
 firecracker-minimal:
     FROM alpine:3.16
