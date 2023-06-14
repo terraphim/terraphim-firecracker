@@ -90,7 +90,7 @@ bionic-image:
     RUN mkdir keypairs
     RUN ssh-keygen -t ed25519 -q -N "" -f keypairs/terraphim
     RUN mkdir -m 0600 -p /root/.ssh/
-    COPY --chmod 644 keypairs/terraphim.pub /root/.ssh/authorized_keys
+    RUN cp keypairs/terraphim.pub /root/.ssh/authorized_keys
     RUN cp keypairs/terraphim.pub /root/.ssh/authorized_keys && chmod 644 /root/.ssh/authorized_keys
     SAVE ARTIFACT keypairs
 
