@@ -151,11 +151,11 @@ save-keys:
     SAVE ARTIFACT keypairs AS LOCAL keypairs
 
 firecracker-minimal:
-    FROM alpine:3.16
+    FROM ubuntu:18.04
     WORKDIR artifacts
 
     COPY +rootfs/rootfs.bionic .
     COPY +kernel/kernel.bin .
 
-    SAVE ARTIFACT rootfs.ext4 AS LOCAL rootfs.ext4
+    SAVE ARTIFACT rootfs.bionic AS LOCAL ./images_test/bionic/terraphim-bionic.local.rootfs
     SAVE ARTIFACT kernel.bin AS LOCAL kernel.bin

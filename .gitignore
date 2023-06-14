@@ -2,3 +2,5 @@ bionic.vmlinux
 images/
 keypairs/
 src/
+images_test/
+kernel.bin
