@@ -87,12 +87,12 @@ bionic-image:
     RUN rm -f /etc/systemd/system/dbus-org.freedesktop.resolve1.service
     RUN rm -f /etc/systemd/system/sysinit.target.wants/systemd-timesyncd.service
     # RUN echo 'root:Docker!' | chpasswd
-    #RUN mkdir keypairs
-    #RUN ssh-keygen -t ed25519 -q -N "" -f keypairs/terraphim
+    RUN mkdir keypairs
+    RUN ssh-keygen -t ed25519 -q -N "" -f keypairs/terraphim
     RUN mkdir -m 0600 -p /root/.ssh/
     COPY --chmod 644 keypairs/terraphim.pub /root/.ssh/authorized_keys
-    # RUN cp keypairs/terraphim.pub /root/.ssh/authorized_keys && chmod 644 /root/.ssh/authorized_keys
-    # SAVE ARTIFACT keypairs AS LOCAL keypairs
+    RUN cp keypairs/terraphim.pub /root/.ssh/authorized_keys && chmod 644 /root/.ssh/authorized_keys
+    SAVE ARTIFACT keypairs
 
 
 bionic-terraphim:
@@ -105,7 +105,7 @@ bionic-terraphim:
     COPY scripts/rgcluster.service /etc/systemd/system/
     RUN chmod +x /opt/rediscluster/rgservice.sh
     RUN systemctl enable rgcluster
-    COPY --chmod 644 keypairs/terraphim.pub /terraphim/.ssh/authorized_keys
+    COPY --chmod 644 +bionic-image/keypairs/terraphim.pub /terraphim/.ssh/authorized_keys
     RUN chown -R terraphim:terraphim /terraphim
     SAVE IMAGE --push ghcr.io/applied-knowledge-systems/terraphim-server:bionic
 
