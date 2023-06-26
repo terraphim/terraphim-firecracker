@@ -52,7 +52,7 @@ kernel:
 
 rootfs:
     FROM earthly/dind
-    ENV SIZE="5000M"
+    ENV SIZE="16000M"
     RUN echo $SIZE
     WORKDIR /rootfs
     ENV img_file = "/rootfs/rootfs.bionic"
