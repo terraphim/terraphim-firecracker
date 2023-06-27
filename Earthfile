@@ -2,12 +2,6 @@ VERSION 0.7
 PROJECT applied-knowledge-systems/terraphim-firecracker
 FROM ubuntu:18.04
 
-ci-pipeline:
-  PIPELINE
-  TRIGGER push main
-  TRIGGER pr main
-  BUILD --allow-privileged +rootfs
-          
 ARG TARGETARCH
 ARG TARGETOS
 ARG TARGETPLATFORM
@@ -18,6 +12,12 @@ IF [ "$TARGETARCH" = amd64 ]
 ELSE
     ARG --global ARCH=$TARGETARCH
 END
+
+ci-pipeline:
+  PIPELINE
+  TRIGGER push main
+  TRIGGER pr main
+  BUILD --allow-privileged +rootfs
 
 all:
     BUILD \
