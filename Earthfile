@@ -1,5 +1,5 @@
 VERSION 0.7
-PROJECT applied-knowledge-systems/terraphim-private-cloud
+PROJECT applied-knowledge-systems/terraphim-firecracker
 FROM ubuntu:18.04
 ARG TARGETARCH
 ARG TARGETOS
