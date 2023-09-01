@@ -76,10 +76,9 @@ bionic-image:
     FROM ghcr.io/applied-knowledge-systems/terraphim-fastapiapp:bionic
     ENV DEBIAN_FRONTEND noninteractive
     ENV DEBCONF_NONINTERACTIVE_SEEN true
-    # RUN rm -rfv /var/lib/apt/lists/*
-    # RUN apt clean
-    # RUN apt update waiting for fix https://github.com/redis-stack/redis-stack/issues/452 
-    # RUN DEBIAN_FRONTEND=noninteractive DEBCONF_NONINTERACTIVE_SEEN=true TZ=Etc/UTC apt-get install -yqq --no-install-recommends systemctl openssh-server
+    RUN rm -rfv /var/lib/apt/lists/*
+    RUN apt clean
+    RUN apt-get update
     RUN DEBIAN_FRONTEND=noninteractive DEBCONF_NONINTERACTIVE_SEEN=true TZ=Etc/UTC apt-get install -yqq --no-install-recommends udev systemd-sysv openssh-server iproute2 curl \
       dbus \
       kmod \
